@@ -1,1 +1,0 @@
-export declare function HashRouter(staticRoutes: Record<string, (...props: any[]) => HTMLElement>, dynamicRoutes: Record<string, (...props: any[]) => HTMLElement>, fallback: () => HTMLElement): HTMLElement;
