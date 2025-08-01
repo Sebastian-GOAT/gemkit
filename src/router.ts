@@ -4,7 +4,7 @@ export function HashRouter(
     fallback: () => HTMLElement
 ) {
 
-    const path = window.location.hash.slice(1) || '/';
+    const path = location.hash.slice(1) || '/';
     if (staticRoutes[path])
         return staticRoutes[path]();
 

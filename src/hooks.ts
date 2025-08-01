@@ -10,12 +10,10 @@ export function mountApp(root: HTMLElement, render: () => HTMLElement): void {
 
     reRender();
 
-    if (typeof window !== 'undefined') {
-        window.addEventListener('hashchange', reRender);
-    }
+    addEventListener('hashchange', reRender);
 }
 
-function reRender(): void {
+export function reRender(): void {
 
     if (!appElement || !renderFunc) return;
     
