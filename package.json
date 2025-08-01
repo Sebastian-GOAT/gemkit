@@ -7,9 +7,12 @@
     "build": "rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "gemkit",
+    "util"
+  ],
   "author": "sebastian-goat",
-  "license": "ISC",
+  "license": "MIT",
   "type": "module",
   "exports": {
     "./router": {

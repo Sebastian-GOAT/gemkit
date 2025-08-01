@@ -7,6 +7,10 @@ let renderFunc: () => HTMLElement;
 export function mountApp(root: HTMLDivElement, render: () => HTMLElement) {
     appElement = root;
     renderFunc = render;
+    reRender();
+    if (typeof window !== 'undefined') {
+        window.addEventListener('hashchange', reRender);
+    }
 }
 
 function reRender() {
