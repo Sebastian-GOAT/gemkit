@@ -1,26 +1,26 @@
 let appState: Record<string, any> = {};
 const mountQueue: (() => void)[] = [];
 
-let appElement: HTMLDivElement;
+let appElement: HTMLElement;
 let renderFunc: () => HTMLElement;
 
-export function mountApp(root: HTMLDivElement, render: () => HTMLElement) {
+export function mountApp(root: HTMLElement, render: () => HTMLElement): void {
     appElement = root;
     renderFunc = render;
+
     reRender();
+
     if (typeof window !== 'undefined') {
         window.addEventListener('hashchange', reRender);
     }
 }
 
-function reRender() {
+function reRender(): void {
 
     if (!appElement || !renderFunc) return;
     
-    const appWrapper = appElement;
-    
-    appWrapper.innerHTML = '';
-    appWrapper.appendChild(renderFunc());
+    appElement.innerHTML = '';
+    appElement.appendChild(renderFunc());
     
     while (mountQueue.length) {
         const callback = mountQueue.shift()!;

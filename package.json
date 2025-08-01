@@ -1,6 +1,6 @@
 {
   "name": "gemkit",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "create-gemkit-app util library.",
   "main": "dist/index.js",
   "scripts": {
@@ -25,6 +25,11 @@
       "import": "./dist/elements.js"
     }
   },
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENCE"
+  ],
   "types": "dist/index.d.ts",
   "devDependencies": {
     "@rollup/plugin-typescript": "^12.1.4",
