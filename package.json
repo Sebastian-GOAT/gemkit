@@ -1,0 +1,31 @@
+{
+  "name": "gemkit",
+  "version": "0.0.1",
+  "description": "create-gemkit-app util library.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rollup -c",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "sebastian-goat",
+  "license": "ISC",
+  "type": "module",
+  "exports": {
+    "./router": {
+      "import": "./dist/router.js"
+    },
+    "./hooks": {
+      "import": "./dist/hooks.js"
+    },
+    "./elements": {
+      "import": "./dist/elements.js"
+    }
+  },
+  "types": "dist/index.d.ts",
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^12.1.4",
+    "rollup": "^4.46.2",
+    "typescript": "^5.9.2"
+  }
+}
