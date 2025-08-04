@@ -16,8 +16,14 @@ function createGemkitElement(elName: string, props: Record<string, any>): HTMLEl
     if (props.setReference)
         props.setReference(el);
 
+    if (props.style) {
+        for (const key of props.style) {
+            el.style[key] = props.style[key];
+        }
+    }
+
     Object.entries(props).forEach(([key, value]) => {
-        const illegalProps = ['onClick', 'className', 'htmlType', 'setReference'];
+        const illegalProps = ['onClick', 'className', 'htmlType', 'setReference', 'style'];
         if (!illegalProps.includes(key))
             el.setAttribute(key, value);
     });
