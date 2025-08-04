@@ -147,6 +147,6 @@ export default function Counter() {
 
 ## 📞 Contact
 
-Have any questions or suggestions?
-📧 Email: sebastianrucabado0@gmail.com
-📬 Or open a [issue](https://github.com/Sebastian-GOAT/gemkit/issues) right here on GitHub.
+Have any questions or suggestions? <br>
+📧 Email: sebastianrucabado0@gmail.com <br>
+📬 Or open an [issue](https://github.com/Sebastian-GOAT/gemkit/issues) right here on GitHub.
