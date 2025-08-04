@@ -29,7 +29,6 @@ export function reRender(): void {
 export function ReactiveState<T>(stateName: string, init: T) {
 
     let value: T = appState[stateName] ?? init;
-    console.log(value)
 
     const setValue = (newValue: T) => {
         if (newValue !== value) {
