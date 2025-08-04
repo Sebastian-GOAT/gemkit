@@ -23,6 +23,36 @@ export default function HomePage() {
 }
 ```
 
+### 🛠️ Custom components
+
+You can also create custom components and pass props to them. You
+might want to consider using the global state manager to avoid prop
+drilling.
+
+```js
+import Foo from '../components/Foo.js';
+
+export default function App() {
+
+    return Foo({
+        bar: 'baz'
+    });
+}
+```
+
+Then the Foo component:
+
+```js
+import { H1 } from 'gemkit/elements';
+
+export default function Foo({ bar }) {
+
+    return H1({
+        children: [bar]
+    });
+}
+```
+
 ### 🔀 Hash router
 
 Gemkit uses a hash routing system to allow routing on single page applications.
@@ -115,32 +145,8 @@ export default function Counter() {
 }
 ```
 
-### 🛠️ Custom components
+## 📞 Contact
 
-You can also create custom components and pass props to them. You
-might want to consider using the global state manager to avoid prop
-drilling.
-
-```js
-import Foo from '../components/Foo.js';
-
-export default function App() {
-
-    return Foo({
-        bar: 'baz'
-    });
-}
-```
-
-Then the Foo component:
-
-```js
-import { H1 } from 'gemkit/elements';
-
-export default function App({ bar }) {
-
-    return H1({
-        children: [bar]
-    });
-}
-```
+Have any questions or suggestions?
+📧 Email: sebastianrucabado0@gmail.com
+📬 Or open a [issue](https://github.com/Sebastian-GOAT/gemkit/issues) right here on GitHub.
