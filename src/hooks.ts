@@ -1,5 +1,13 @@
-let appState: Record<string, any> = {};
-const mountQueue: (() => void)[] = [];
+type Effect = {
+    dependencies: string[];
+    func: () => void | (() => void);
+    cleanup: (() => void) | null;
+};
+
+const appState: Record<string, any> = {};
+
+const appEffects: Effect[] = [];
+const effectCleanups: (() => void)[] = [];
 
 let appElement: HTMLElement;
 let renderFunc: () => HTMLElement;
@@ -19,14 +27,9 @@ export function reRender(): void {
     
     appElement.innerHTML = '';
     appElement.appendChild(renderFunc());
-    
-    while (mountQueue.length) {
-        const callback = mountQueue.shift()!;
-        callback();
-    }
 }
 
-export function ReactiveState<T>(stateName: string, init: T) {
+export function withState<T>(stateName: string, init: T): [T, (newValue: T) => void] {
 
     let value: T = appState[stateName] ?? init;
 
@@ -34,13 +37,28 @@ export function ReactiveState<T>(stateName: string, init: T) {
         if (newValue !== value) {
             value = newValue;
             appState[stateName] = newValue;
+
+            effectCleanups.forEach(c => c());
+
             reRender();
+
+            const effects = appEffects.find(e => e.dependencies.includes(stateName));
+            
+            for (const effect of appEffects) {
+                const cleanup = effect.func();
+                if (cleanup)
+                    effectCleanups.push(cleanup);
+            }
         }
     }
 
     return [value, setValue];
 }
 
-export function onMount(callback: () => void) {
-    mountQueue.push(callback);
+export function withEffect(callback: () => void | (() => void), dependencies: any[]) {
+    appEffects.push({
+        dependencies,
+        func: callback,
+        cleanup: null
+    });
 }

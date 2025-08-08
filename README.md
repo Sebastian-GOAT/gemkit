@@ -30,7 +30,7 @@ might want to consider using the global state manager to avoid prop
 drilling.
 
 ```js
-import Foo from '../components/Foo.js';
+import Foo from './components/Foo.js';
 
 export default function App() {
 
@@ -49,6 +49,25 @@ export default function Foo({ bar }) {
 
     return H1({
         children: [bar]
+    });
+}
+```
+
+Gemkit also provides you with some built in components:
+
+```js
+import { List } from 'gemkit/elements';
+
+export default function App() {
+
+    const todos = ['Go shopping', 'Do the dishes', 'Walk the dog'];
+
+    return List({
+        list: todos,
+        fn: (todo, i) => Span({
+            children: [todo],
+            onClick: () => console.log(`${i}th todo`)
+        })
     });
 }
 ```
@@ -93,14 +112,14 @@ For example, `https://www.yoursite.com/user/abcfoobarbazxyz`:
 
 ```js
 import { fetchUser } from '../lib/util/fetch.js';
-import { ReactiveState } from 'gemkit/hooks';
+import { withState } from 'gemkit/hooks';
 import { H1 } from 'gemkit/elements';
 
 export default function User(uid) {
 
-    const [user, setUser] = ReactiveState('user', null);
+    const [user, setUser] = withState('user', null);
 
-    fetchData(uid).then(u => setUser(u));
+    fetchUser(uid).then(u => setUser(u));
 
     return H1({
         children: user ? [`Welcome, ${user}!`] : ['Loading...']
@@ -108,10 +127,10 @@ export default function User(uid) {
 }
 ```
 
-### 🚦 State & state manangement
+### 🚦 useState & state manangement
 
 All state is stored in a global object. You can have state
-in your application by using the `ReactiveState` hook, which
+in your application by using the `withState` hook, which
 takes 2 arguments:
 
 1. Key (unique identifier)
@@ -129,12 +148,12 @@ not just the component. All code inside a component (like the `console.log`
 below) will execute on every rerender.
 
 ```js
-import { ReactiveState } from 'gemkit/hooks';
+import { withState } from 'gemkit/hooks';
 import { Button } from 'gemkit/elements';
 
 export default function Counter() {
 
-    const [count, setCount] = ReactiveState('count', 0);
+    const [count, setCount] = withState('count', 0);
 
     console.log(`Count: ${count}`);
 
@@ -144,6 +163,8 @@ export default function Counter() {
     });
 }
 ```
+
+### withEffect
 
 ## 📞 Contact
 
