@@ -6,6 +6,75 @@ Gemkit is a JavaScript framework/library for building user interfaces fast.
 It uses functional components with ESM imports and exports, making the code
 readable and modern.
 
+## Getting started
+
+To create a new Gemkit app, you can use the CLI command:
+
+```bash
+npx create-gemkit-app@latest your-project
+```
+
+That will generate a starter folder structure with Vite, Tailwind and TypeScript
+already integrated. After running the following commands:
+
+```bash
+cd your-project
+npm install
+```
+
+your folder strucure should look like this:
+
+```text
+your-project/
+    node_modules/
+    package-lock.json
+    package.json
+    src/
+        components/
+            Counter.ts
+        pages/
+            Home.ts
+            NotFound.ts
+        App.ts
+        main.ts
+        index.css
+    index.html
+    vite.config.js
+```
+
+## Development
+
+Being able to view the webpage as you're building it is very important.
+That's why Gemkit uses Vite Dev Server for fast hot reloads and quick
+build time.
+
+For development, run the dev command:
+
+```bash
+npm run dev
+```
+
+which will launch the Vite Dev Server on port 5173 (if available). You
+can also use:
+
+```bash
+npm run preview
+```
+
+to see a preview of your web app from the `dist/` folder.
+
+## Building for production
+
+If your app is ready for production, you can use the build command:
+
+```bash
+npm run build
+```
+
+This will create a `dist/` folder, where you can find all your bundled
+HTML/CSS/JS code, that you can deploy on any webhosting service (ex.
+Vercel, Github Pages, Netlify).
+
 ## Key concepts
 
 ### ⚡ Functional components
