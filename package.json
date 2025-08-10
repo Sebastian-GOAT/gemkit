@@ -1,6 +1,6 @@
 {
   "name": "gemkit",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "create-gemkit-app util library.",
   "main": "dist/index.js",
   "scripts": {
@@ -9,7 +9,10 @@
   },
   "keywords": [
     "gemkit",
-    "util"
+    "util",
+    "frontend",
+    "ui",
+    "framework"
   ],
   "author": "sebastian-goat",
   "license": "MIT",

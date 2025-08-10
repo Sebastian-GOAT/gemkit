@@ -62,3 +62,7 @@ export function withEffect(callback: () => void | (() => void), dependencies: an
         cleanup: null
     });
 }
+
+export function withRef<T>(): { current: T | null } {
+    return { current: null };
+}

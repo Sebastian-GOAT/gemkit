@@ -10,11 +10,8 @@ function createGemkitElement(elName: string, props: Record<string, any>): HTMLEl
         splitted.forEach((className: string) => el.classList.add(className));
     }
 
-    if (props.htmlType)
-        el.setAttribute('type', props.htmlType);
-
-    if (props.setReference)
-        props.setReference(el);
+    if (props.ref)
+        props.ref.current = el;
 
     if (props.style) {
         for (const key of props.style) {
@@ -23,7 +20,7 @@ function createGemkitElement(elName: string, props: Record<string, any>): HTMLEl
     }
 
     Object.entries(props).forEach(([key, value]) => {
-        const illegalProps = ['onClick', 'className', 'htmlType', 'setReference', 'style'];
+        const illegalProps = ['onClick', 'className', 'ref', 'style'];
         if (!illegalProps.includes(key))
             el.setAttribute(key, value);
     });
