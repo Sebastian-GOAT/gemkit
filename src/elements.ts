@@ -14,8 +14,8 @@ function createGemkitElement(elName: string, props: Record<string, any>): HTMLEl
         props.ref.current = el;
 
     if (props.style) {
-        for (const key of props.style) {
-            el.style[key] = props.style[key];
+        for (const key of Object.keys(props.style)) {
+            el.style[key as any] = props.style[key];
         }
     }
 

@@ -1,13 +1,17 @@
 type Effect = {
     dependencies: string[];
     func: () => void | (() => void);
-    cleanup: (() => void) | null;
+};
+
+type EffectCleanup = {
+    dependencies: string[];
+    func: () => void;
 };
 
 const appState: Record<string, any> = {};
 
 const appEffects: Effect[] = [];
-const effectCleanups: (() => void)[] = [];
+let appEffectCleanups: EffectCleanup[] = [];
 
 let appElement: HTMLElement;
 let renderFunc: () => HTMLElement;
@@ -38,28 +42,29 @@ export function withState<T>(stateName: string, init: T): [T, (newValue: T) => v
             value = newValue;
             appState[stateName] = newValue;
 
-            effectCleanups.forEach(c => c());
+            const effects = appEffects.filter(effect => effect.dependencies.includes(stateName));
+            const effectCleanups = appEffectCleanups.filter(effect => effect.dependencies.includes(stateName));
+
+            effectCleanups.forEach(effect => effect.func());
+            appEffectCleanups = appEffectCleanups.filter(effect => !effect.dependencies.includes(stateName));
 
             reRender();
-
-            const effects = appEffects.find(e => e.dependencies.includes(stateName));
             
-            for (const effect of appEffects) {
+            effects.forEach(effect => {
                 const cleanup = effect.func();
                 if (cleanup)
-                    effectCleanups.push(cleanup);
-            }
+                    appEffectCleanups.push({ dependencies: effect.dependencies, func: cleanup });
+            });
         }
     }
 
     return [value, setValue];
 }
 
-export function withEffect(callback: () => void | (() => void), dependencies: any[]) {
+export function withEffect(callback: Effect['func'], dependencies: Effect['dependencies']) {
     appEffects.push({
         dependencies,
-        func: callback,
-        cleanup: null
+        func: callback
     });
 }
 
