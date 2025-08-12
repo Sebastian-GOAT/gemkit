@@ -1,3 +1,5 @@
+import { type Ref } from './types';
+
 type Effect = {
     dependencies: string[];
     func: () => void | (() => void);
@@ -68,6 +70,6 @@ export function withEffect(callback: Effect['func'], dependencies: Effect['depen
     });
 }
 
-export function withRef<T>(): { current: T | null } {
+export function withRef<T>(): Ref<T> {
     return { current: null };
 }
